@@ -8,4 +8,4 @@ module cache(address, hit_miss, out, clk);
     reg [3:0]block_offset = address[3:0];
     reg [7:0]index = address[11:4];
     reg [19:0]tag = address[31:12];
-    
+endmodule
