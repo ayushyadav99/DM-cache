@@ -5,6 +5,7 @@ module cache(address, hit_miss, out, clk);
     output hit_miss;
     output [31:0]out;
     reg [31:0][15:0]cache[255:0];
-    wire [3:0]block_offset = address[3:0];
-    wire [7:0]index = address[11:4];
-    wire [19:0]tag = address[31:12];
+    reg [3:0]block_offset = address[3:0];
+    reg [7:0]index = address[11:4];
+    reg [19:0]tag = address[31:12];
+    
