@@ -6,7 +6,7 @@ module cache(address, hit_miss, out, clk);
     
     reg [31:0][15:0]cache[255:0];
     reg [19:0]tag_reg[255:0];               //for cache
-    reg [31:0]memory[29999:0];
+    reg [31:0]memory[299999:0];
     initial begin
         $readmemb("memory.txt",memory);
     end
