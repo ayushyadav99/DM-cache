@@ -44,6 +44,7 @@ module cache(address, hit_miss, out, clk);
                 begin
                     hit_miss <= 0;
                     cache[index][block_offset] <= memory[address];
+                    tag_reg[index] = tag;
                 end
         end
 
