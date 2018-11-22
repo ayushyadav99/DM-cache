@@ -26,7 +26,7 @@ module cache(address, hit_miss, out, clk);
     reg [31:0]memory[29999:0];
     initial begin
         $readmemb("memory.txt",memory);
-        $display("%b", memory[34]);
+        $display("%b", memory[43]);
     end
 
     wire [3:0]block_offset = address[3:0];
@@ -42,7 +42,8 @@ module cache(address, hit_miss, out, clk);
                 end
             else
                 begin
-                    hit_miss = 0;
+                    hit_miss <= 0;
+                    cache[index][block_offset] <= memory[address];
                 end
         end
 
