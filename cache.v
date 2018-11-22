@@ -23,7 +23,12 @@ module cache(address, hit_miss, out, clk);
     
     reg [31:0][15:0]cache[255:0];
     reg [19:0]tag_reg[255:0];               //for cache
-    
+    reg [31:0]memory[29999:0];
+    initial begin
+        $readmemb("memory.txt",memory);
+    end
+    // $display("%b\n", memory[0]);
+
     reg [3:0]block_offset = address[3:0];
     reg [7:0]index = address[11:4];
     reg [19:0]tag = address[31:12];
