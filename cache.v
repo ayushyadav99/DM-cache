@@ -1,21 +1,4 @@
-// module comparator(address, tag_reg, flag, clk);
-//     input[31:0] address;
-//     input clk;
-//     input [19:0]tag_reg;
-//     output reg flag;
-//     always @ (posedge clk)
-//             begin
-//             if (tag_reg == tag)
-//                 begin
-//                     flag =1;
-//                 end
-//             else
-//                 flag = 0;
-//             end
-// endmodule
-
 module cache(address, hit_miss, out, clk);
-    // reg [31:0]cache[256*16-1:0]
     input [31:0]address;
     input clk;
     output reg hit_miss;                    //1 if hit, 0 if miss
@@ -26,14 +9,13 @@ module cache(address, hit_miss, out, clk);
     reg [31:0]memory[29999:0];
     initial begin
         $readmemb("memory.txt",memory);
-        $display("%b", memory[43]);
     end
 
     wire [3:0]block_offset = address[3:0];
     wire [7:0]index = address[11:4];
     wire [19:0]tag = address[31:12];
     integer i;
-    wire [31:0]block_start = {address[31:4],4'b0000}; 
+    wire [31:0]block_start = {address[31:4],4'b0000};
 
     always @ (posedge clk)
         begin
@@ -48,9 +30,9 @@ module cache(address, hit_miss, out, clk);
                         begin
                             cache[index][i] <= memory[block_start+i];
                         end
-                    tag_reg[index] = tag;
+                    tag_reg[index] <= tag;
                 end
-            out <= cache[index][block_offset];
+            out = cache[index][block_offset];
         end
 
 

@@ -2,6 +2,6 @@
 # outputted into a text file to act as memory
 
 f = open("memory.txt", "w")
-for i in range(30000):
+for i in range(300000):
     f.write('{:032b}'.format(i))
     f.write('\n')
