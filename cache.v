@@ -32,20 +32,25 @@ module cache(address, hit_miss, out, clk);
     wire [3:0]block_offset = address[3:0];
     wire [7:0]index = address[11:4];
     wire [19:0]tag = address[31:12];
+    integer i;
+    wire [31:0]block_start = {address[31:4],4'b0000}; 
 
     always @ (posedge clk)
         begin
             if (tag_reg[index] == tag)
                 begin
                     hit_miss <= 1;
-                    out <= cache[index][block_offset];
                 end
             else
                 begin
                     hit_miss <= 0;
-                    cache[index][block_offset] <= memory[address];
+                    for (i = 0; i < 16; i++)
+                        begin
+                            cache[index][i] <= memory[block_start+i];
+                        end
                     tag_reg[index] = tag;
                 end
+            out <= cache[index][block_offset];
         end
 
 
