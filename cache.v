@@ -32,7 +32,7 @@ module cache(address, hit_miss, out, clk);
                         end
                     tag_reg[index] <= tag;
                 end
-            out = cache[index][block_offset];
+            out <= cache[index][block_offset];
         end
 
 
