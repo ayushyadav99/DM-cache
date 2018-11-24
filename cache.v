@@ -6,10 +6,10 @@ module cache(address, hit_miss, out, clk);
     
     reg [31:0][15:0]cache[255:0];
     reg [19:0]tag_reg[255:0];               //for cache
-    reg [31:0]memory[299999:0];
-    initial begin
-        $readmemb("memory.txt",memory);
-    end
+    // reg [31:0]memory[299999:0];
+    // initial begin
+    //     $readmemb("memory.txt",memory);
+    // end
 
     wire [3:0]block_offset = address[3:0];
     wire [7:0]index = address[11:4];
@@ -21,20 +21,17 @@ module cache(address, hit_miss, out, clk);
         begin
             if (tag_reg[index] == tag)
                 begin
-                    hit_miss <= 1;
+                    hit_miss = 1;
                 end
             else
                 begin
-                    hit_miss <= 0;
+                    hit_miss = 0;
                     for (i = 0; i < 16; i++)
                         begin
-                            cache[index][i] <= memory[block_start+i];
+                            cache[index][i] = block_start+i;
                         end
-                    tag_reg[index] <= tag;
+                    tag_reg[index] = tag;
                 end
-            out <= cache[index][block_offset];
+            out = cache[index][block_offset];
         end
-
-
-
 endmodule
